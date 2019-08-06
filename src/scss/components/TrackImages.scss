@@ -1,0 +1,85 @@
+.track-images {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 56px - 75px);
+  transition: ease transform 0.5s;
+  overflow: hidden;
+  touch-action: pan-y;
+
+  &.no-transition {
+    .track-image {
+      &.is-active,
+      &.is-pre-prev,
+      &.is-prev,
+      &.is-pre-next,
+      &.is-next {
+        transition-duration: 0s, 0s;
+      }
+    }
+  }
+
+  .track-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 9999px;
+    will-change: transform;
+
+    &.is-active,
+    &.is-pre-prev,
+    &.is-prev,
+    &.is-pre-next,
+    &.is-next {
+      left: 0;
+      transition: ease 0.3s transform, ease left 0s;
+      transition-delay: 0s, 0.3s;
+    }
+
+    &.is-active {
+      z-index: 3;
+      transform: translate(0) translateZ(0);
+
+      // .track-cover {
+      //   transform: scale(1.05);
+      // }
+    }
+
+    &.is-prev {
+      z-index: 2;
+      transform: translate(-100%) translateZ(0);
+    }
+
+    &.is-pre-prev {
+      z-index: 1;
+      transform: translate(-200%) translateZ(0);
+    }
+
+    &.is-next {
+      z-index: 2;
+      transform: translate(100%) translateZ(0);
+    }
+
+    &.is-pre-next {
+      z-index: 1;
+      transform: translate(200%) translateZ(0);
+    }
+
+    .track-cover {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-color: #0e161d;
+      background-position: 50% 50%;
+      background-size: cover;
+      transition: ease transform 0.5s, ease box-shadow 0.5s;
+      box-shadow: 0 0 50px 0 #000000, 0 0 50px 0 #000000;
+    }
+  }
+}
+
+.playlist-active {
+  .track-images {
+    transform: translateY(-25%) translateZ(0);
+  }
+}
